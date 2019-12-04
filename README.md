@@ -10,6 +10,7 @@ ADTabbar自定义底部导航栏支持App、小程序的中间自定义按钮，
 
 还有不足的地方会及时优化，也欢迎提出建议！
 
+![示例](https://github.com/jiabin87428/uni-app-component-ADTabbar/blob/master/example.gif?raw=true)
 
 ### 使用方式
 
