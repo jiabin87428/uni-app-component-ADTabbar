@@ -1,10 +1,12 @@
 <template>
-	<view class="tabbar" :style="{backgroundColor: backgroundColor}">
+	<view class="tabbar" :style="{backgroundColor: backgroundColor, height: setTabHeight + 'upx'}">
 		<slot></slot>
 	</view>
 </template>
 
 <script>
+	import Vue from 'vue'
+	
 	export default {
 		name: 'adTabbar',
 		components: {},
@@ -13,7 +15,22 @@
 			backgroundColor: {
 				type: String,
 				default: "#FFFFFF"
+			},
+			// tabbar高度
+			tabHeight: {
+				type: [String, Number],
+				default: 130
 			}
+		},
+		computed: {
+			// 设置Tabbar高度
+			setTabHeight() {
+				let info = plus.navigator.getSafeAreaInsets();
+				let tabh = parseFloat(this.tabHeight) + info.bottom / 2;
+				Vue.prototype.TabBarHeight = tabh;
+				console.log('Vue.prototype.TabBarHeight: ' + Vue.prototype.TabBarHeight)
+				return tabh;
+			},
 		},
 		data() {
 			return {
@@ -41,7 +58,7 @@
 		
 		/*tabbar*/
 		padding: 0;
-		height: calc(130upx + env(safe-area-inset-bottom) / 2);
+		/* height: calc(130upx + env(safe-area-inset-bottom) / 2); */
 		padding-bottom: calc(env(safe-area-inset-bottom) / 2);
 		
 		/*shadow*/

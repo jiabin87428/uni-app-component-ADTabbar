@@ -3,12 +3,18 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "ADTabbarDemo"
+				"navigationBarTitleText": "ADTabbarDemo",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},{
 			"path": "pages/index/page1",
 			"style": {
-				"navigationBarTitleText": "Page-1"
+				"navigationBarTitleText": "Page-1",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},{
 			"path": "pages/index/page2",

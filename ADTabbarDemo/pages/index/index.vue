@@ -1,5 +1,5 @@
 <template>
-	<view style="height: 100vh;">
+	<view class="baseView" id="baseView">
 		<page1 v-if="curPage=='page1'"></page1>
 		<page2 v-if="curPage=='page2'"></page2>
 		<page3 v-if="curPage=='page3'"></page3>
@@ -38,7 +38,6 @@
 		methods: {
 			// 导航栏切换
 			navClick: function(e) {
-				console.log('事件' + JSON.stringify(e));
 				this.curPage = e.currentTarget.dataset.cur
 			},
 			// 中间按钮点击
