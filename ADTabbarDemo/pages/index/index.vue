@@ -1,9 +1,5 @@
 <template>
 	<view class="baseView" id="baseView">
-		<page1 v-if="curPage=='page1'"></page1>
-		<page2 v-if="curPage=='page2'"></page2>
-		<page3 v-if="curPage=='page3'"></page3>
-		<page4 v-if="curPage=='page4'"></page4>
 		<adTabbar>
 			<adTabbarItem text="首页" dataCur="page1" class="maxWidth" @click="navClick" :textColor="curPage=='page1'? '#DF421D':'#9B9B9B'" :icon="'../../static/andy-ADTabbar/home' + [curPage=='page1'?'-hover':''] + '.png'"></adTabbarItem>
 			<adTabbarItem text="订单" dataCur="page2" class="maxWidth" @click="navClick" :textColor="curPage=='page2'? '#DF421D':'#9B9B9B'" :icon="'../../static/andy-ADTabbar/order' + [curPage=='page2'?'-hover':''] + '.png'"></adTabbarItem>
@@ -15,6 +11,11 @@
 			<adTabbarItem text="图表" dataCur="page3" class="maxWidth" @click="navClick" :textColor="curPage=='page3'? '#DF421D':'#9B9B9B'" :icon="'../../static/andy-ADTabbar/chart' + [curPage=='page3'?'-hover':''] + '.png'"></adTabbarItem>
 			<adTabbarItem text="我的" dataCur="page4" class="maxWidth" @click="navClick" :textColor="curPage=='page4'? '#DF421D':'#9B9B9B'" :icon="'../../static/andy-ADTabbar/my' + [curPage=='page4'?'-hover':''] + '.png'"></adTabbarItem>
 		</adTabbar>
+		<!--把page放在Tabbar下面是因为page中要获取tabbar高度做bottom，需要让tabbar先渲染-->
+		<page1 v-if="curPage=='page1'"></page1>
+		<page2 v-if="curPage=='page2'"></page2>
+		<page3 v-if="curPage=='page3'"></page3>
+		<page4 v-if="curPage=='page4'"></page4>
 	</view>
 </template>
 
