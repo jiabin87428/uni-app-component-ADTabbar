@@ -35,42 +35,58 @@
 			uniSwipeActionItem
 		},
 		props: {
+			// 左侧图标
 			icon: {
 				type: String,
 				default: ""
 			},
+			// 主标题文字
 			text: String,
+			// 主标题颜色
 			textColor: {
 				type: String,
 				default: "#5E5E5E"
 			},
+			// 是否必填
 			mustInput: { //是否必填
 				type: [Boolean, String],
 				default: false
 			},
+			// 右侧副标题文字
 			detail: String,
+			// 右侧副标题文字颜色
 			detailColor: {
 				type: String,
 				default: "#B3B3B3"
 			},
+			// 第二行文字
 			note: String,
+			// 第三行文字
 			note1: String,
+			// 第四行文字
 			note2: String,
+			// 第五行文字
 			note3: String,
+			// 第六行文字
 			note4: String,
+			// 第七行文字
 			note5: String,
+			// 底部文字颜色
 			noteColor: {
 				type: String,
 				default: "#B3B3B3"
 			},
-			showArrow: { //是否显示箭头
+			// 是否显示箭头
+			showArrow: {
 				type: [Boolean, String],
 				default: true
 			},
+			// Cell背景色
 			backgroundColor: {
 				type: String,
 				default: "#FFFFFF"
 			},
+			// 滑动元素
 			swipeOptions: {
 				type: Array,
 				default(){

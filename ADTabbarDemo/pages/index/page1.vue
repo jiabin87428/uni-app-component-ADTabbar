@@ -10,7 +10,7 @@
 		</adNavBar>
 		<mescroll-uni :top="customBarHeight" :bottom="tabBarHeight" :down="downOption" @down="downCallback" @up="upCallback">
 			<block v-for="(item, index) in dataList" :key="index">
-				<adCell :text="item.title" :detail="item.id" :note="item.content"></adCell>
+				<adCell :text="item.title" :detail="item.id" :note="item.content" @click="getData"></adCell>
 			</block>
 		</mescroll-uni>
 	</view>
@@ -21,6 +21,7 @@
 	import adRightBarItem from '@/components/andy-ADNavBar/andy-ADRightBarItem.vue';
 	import adCell from '@/components/andy-adcell/andy-adcell.vue';
 	import MescrollUni from "@/components/mescroll-uni/mescroll-uni.vue";
+	import AppConfig from '@/common/appConfig.js';
 	
 	export default {
 		name: "page1",
@@ -28,7 +29,7 @@
 		data() {
 			return {
 				customBarHeight: this.CustomBarHeight,
-				tabBarHeight: this.TabBarHeight,
+				tabBarHeight: AppConfig.TabbarHeight,
 				pageNum: 0,
 				pageRows: 15,
 				downOption: {
@@ -36,10 +37,6 @@
 				},
 				dataList: []
 			}
-		},
-		created () {
-			console.log('tabBarHeight:' + this.TabBarHeight)
-			// this.getList(true);
 		},
 		methods: {
 			/*下拉刷新的回调 */
@@ -58,6 +55,7 @@
 			},
 			/*上拉加载的回调: mescroll携带page的参数, 其中num:当前页 从1开始, size:每页数据条数,默认10 */
 			upCallback(mescroll) {
+				console.log('加载更多');
 				//联网加载数据
 				this.getListDataFromNet(this.pageNum, this.pageRows, (curPageData, hasNext)=>{
 					//联网成功的回调,隐藏下拉刷新和上拉加载的状态;
@@ -72,9 +70,7 @@
 			
 					//方法三(推荐): 您有其他方式知道是否有下一页 hasNext
 					mescroll.endSuccess(curPageData.length, hasNext); //必传参数(当前页的数据个数, 是否有下一页true/false)
-			
-					//方法四 (不推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据.
-					// mescroll.endSuccess(curPageData.length);
+
 					//设置列表数据
 					this.dataList = this.dataList.concat(curPageData);
 					this.pageNum++;
@@ -112,6 +108,22 @@
 					}
 				}, 1000)
 			},
+			
+			getData: function(e) {
+				// let data = uni.getStorageSync('TESTA');
+				let data = plus.storage.getItem('TESTA')
+				uni.showModal({
+				    title: 'data',
+				    content: data,
+				    success: function (res) {
+				        if (res.confirm) {
+				            console.log('用户点击确定');
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+				});
+			}
 		}
 	}
 </script>

@@ -1,5 +1,6 @@
 <script>
 	import ADNavBarUtil from 'components/andy-ADNavBar/ADNavBarUtil.js'
+	
 	export default {
 		onLaunch: function() {
 			console.log('App Launch');

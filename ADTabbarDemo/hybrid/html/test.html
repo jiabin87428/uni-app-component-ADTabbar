@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>uni-app-web-view</title>
+    <style type="text/css">
+      .btn {
+        display: block;
+        margin: 20px auto;
+        padding: 5px;
+        background-color: #007aff;
+        border: 0;
+        color: #ffffff;
+        height: 40px;
+        width: 200px;
+      }
+
+      .btn-red {
+        background-color: #dd524d;
+      }
+
+      .btn-yellow {
+        background-color: #f0ad4e;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="btn-list">
+      <button class="btn" type="button" data-action="navigateTo">navigateTo</button>
+      <button class="btn" type="button" data-action="redirectTo">redirectTo</button>
+      <button class="btn" type="button" data-action="navigateBack">navigateBack</button>
+      <button class="btn" type="button" data-action="reLaunch">reLaunch</button>
+      <button class="btn btn-red" type="button" data-action="switchTab">switchTab</button>
+      <button class="btn btn-yellow" type="button" data-action="postMessage">postMessage</button>
+      <button class="btn btn-yellow" type="button" data-action="getEnv">getEnv</button>
+    </div>
+    <!-- 微信 JS-SDK 如果不需要兼容小程序，则无需引用此 JS 文件 -->
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <!-- uni 的 SDK -->
+    <script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
+    <script type="text/javascript">
+		// H5 plus事件处理
+		function plusReady(){
+		}
+		if(window.plus){
+			plusReady();
+		}else{
+			document.addEventListener('plusready', plusReady, false);
+		}
+		
+		// 保存内容
+		function saveData(){
+			let data = {
+				action: 'postMessage111'
+			};
+			plus.storage.setItem("TESTA", '22222222222');
+		}
+		
+		// 获取内容
+		function getData() {
+			let data = plus.storage.getItem("TESTA");
+			alert('获取Data：' + data);
+		}
+		
+      document.addEventListener('UniAppJSBridgeReady', function() {
+        document.querySelector('.btn-list').addEventListener('click', function(evt) {
+          var target = evt.target;
+          if (target.tagName === 'BUTTON') {
+            // console.log(target)
+            var action = target.getAttribute('data-action');
+            switch (action) {
+              case 'switchTab':
+				getData();
+                uni.switchTab({
+                  url: '/pages/tabBar/API/API'
+                });
+                break;
+              case 'navigateBack':
+                uni.navigateBack({
+                  delta: 1
+                });
+                break;
+              case 'postMessage':
+				// console.log('action:' + action);
+				saveData();
+                uni.postMessage({
+                  data: {
+                    action: 'postMessage'
+                  }
+                });
+				// uni.setStorage({
+				// 	key: "TESTA",
+				// 	data: {
+				// 		action: 'postMessage111'
+				// 	  },
+				// 	success: function () {
+				// 		console.log('保存成功');
+				// 	},
+				// 	fail() {
+				// 		console.log('保存失败');
+				// 	}
+				// });
+                break;
+              case 'getEnv':
+                uni.getEnv(function(res) {
+                  alert('当前环境：' + JSON.stringify(res));
+                });
+                break;
+              default:
+                uni[action]({
+                  url: '/pages/component/button/button'
+                });
+                break;
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

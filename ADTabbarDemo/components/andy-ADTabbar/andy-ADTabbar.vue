@@ -27,8 +27,8 @@
 			setTabHeight() {
 				let info = plus.navigator.getSafeAreaInsets();
 				let tabh = parseFloat(this.tabHeight) + info.bottom / 2;
-				Vue.prototype.TabBarHeight = tabh;
-				console.log('Vue.prototype.TabBarHeight: ' + Vue.prototype.TabBarHeight)
+				// Vue.prototype.TabBarHeight = tabh;
+				// console.log('Vue.prototype.TabBarHeight: ' + Vue.prototype.TabBarHeight)
 				return tabh;
 			},
 		},
